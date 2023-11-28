@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to My Application</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"  />
+</head>
+<body>
+<div class="container-fluid">
+<!--  <h1>Welcome to my application</h1>-->
+<!--  <a class="h2" th:href="@{/users}">Manage Users</a>-->
+
+
+<form  th:action="@{/tasks/save}"method="post" th:object="${task}"
+       style="max-width: 100px; margin: 0 auto;">
+  <input type="hidden" th:field="*{id}">
+  <br>
+  <div class="form-row">
+    <div class="col-md-10 mb-3">
+      <p><b>Create Task</b></p>
+<!--      <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>-->
+    </div>
+    <div class="col-md-2 mb-3">
+      <button type="button" class="btn btn-light">Save Draft</button>
+    </div>
+    <div class="col-md-12 mb-2">
+      <label for="validationServerUsername">Name</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"></span>
+        </div>
+        <input type="text" th:field="*{assignees}" class="form-control is-invalid" id="validationServerUsername" placeholder="Task Name" aria-describedby="inputGroupPrepend3" required>
+
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationServer03"><b>Start Date</b></label>
+      <input type="date" class="form-control is-invalid" th:field="*{start_date}" id="validationServer03" >
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationServer03"><b>End Date</b></label>
+    <input type="date" class="form-control is-invalid" th:field="*{end_date}" id="validationServer02" >
+  </div>
+  </div>
+
+  <div class="col-md-12 mb-2">
+    <label for="validationServerUsername">Projects</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="projects"></span>
+      </div>
+      <input type="text" class="form-control is-invalid" id="projectName" placeholder="Project Name" aria-describedby="inputGroupPrepend3" >
+
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect2">Example multiple select</label>
+    <select th:each="task: ${tasks}" multiple class="form-control" id="exampleFormControlSelect2">
+      <option th:text="${task.name}"></option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+    <label class="form-check-label" for="inlineRadio1">1</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+    <label class="form-check-label" for="inlineRadio2">2</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+    <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+  </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary m-2">Save</button>
+
+    <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+  </div></form>
+  <a class="small" th:href="@{/export}">Tasks Spreadsheet</a>
+
+</div>
+
+<script type="text/javascript">
+  function cancelForm() {
+    window.location = "[[@{/users}]]";
+  }
+</script>
+</body>
+</html>
